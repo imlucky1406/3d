@@ -12,7 +12,7 @@ const FOOTER_LINKS = {
 export default function Footer() {
   const navigate = useNavigate();
   return (
-    <footer style={{ padding: "56px 40px 28px", background: "#1C1C2E" }}>
+    <footer className="footer-pad" style={{ background: "#1C1C2E" }}>
       <div style={{ maxWidth: 1200, margin: "0 auto" }}>
         <div
           style={{

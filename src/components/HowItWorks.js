@@ -3,7 +3,7 @@ import { HOW_STEPS } from "../data";
 
 export default function HowItWorks() {
   return (
-    <section id="how-it-works" style={{ padding: "76px 40px", background: "#FFF8F0" }}>
+    <section id="how-it-works" className="section-pad" style={{ background: "#FFF8F0" }}>
       <div style={{ maxWidth: 1100, margin: "0 auto" }}>
         <div style={{ textAlign: "center", marginBottom: 52 }}>
           <div className="slabel" style={{ display: "flex", justifyContent: "center" }}>

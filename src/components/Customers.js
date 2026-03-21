@@ -9,7 +9,7 @@ const Star = () => (
 
 export default function Customers() {
   return (
-    <section style={{ padding: "76px 40px", background: "#E8FFFB" }}>
+    <section className="section-pad" style={{ background: "#E8FFFB" }}>
       <div style={{ maxWidth: 1000, margin: "0 auto" }}>
         <div style={{ textAlign: "center", marginBottom: 44 }}>
           <div className="slabel" style={{ display: "flex", justifyContent: "center" }}>

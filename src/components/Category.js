@@ -3,7 +3,7 @@ import { CATEGORIES } from "../data";
 
 export default function Category() {
   return (
-    <section style={{ padding: "76px 40px", background: "#FFF4E6" }}>
+    <section className="section-pad" style={{ background: "#FFF4E6" }}>
       <div style={{ maxWidth: 1200, margin: "0 auto" }}>
         <div className="slabel">✦ Browse by Category</div>
         <h2

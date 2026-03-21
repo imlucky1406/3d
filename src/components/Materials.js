@@ -3,7 +3,7 @@ import { MATERIALS } from "../data";
 
 export default function Materials() {
   return (
-    <section id="materials" style={{ padding: "76px 40px", background: "#FDFCF8" }}>
+    <section id="materials" className="section-pad" style={{ background: "#FDFCF8" }}>
       <div style={{ maxWidth: 1100, margin: "0 auto" }}>
         <div style={{ textAlign: "center", marginBottom: 52 }}>
           <div className="slabel" style={{ display: "flex", justifyContent: "center" }}>

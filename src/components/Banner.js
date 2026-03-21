@@ -18,8 +18,8 @@ export default function Banner() {
 
   return (
     <section
+      className="section-pad"
       style={{
-        padding: "76px 40px",
         background: "linear-gradient(135deg,#FF6B6B 0%,#FF9F43 55%,#FFD580 100%)",
         textAlign: "center",
         position: "relative",

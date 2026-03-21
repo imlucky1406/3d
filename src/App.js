@@ -39,6 +39,16 @@ const CSS = `
   @media(max-width:900px){.two-col{grid-template-columns:1fr!important}.hide-m{display:none!important}}
   @media(max-width:600px){.g3{grid-template-columns:repeat(2,1fr)!important}}
   @media(max-width:400px){.g3{grid-template-columns:1fr!important}}
+  .section-pad{padding:clamp(48px,8vw,76px) clamp(16px,4vw,40px)}
+  .footer-pad{padding:clamp(40px,6vw,56px) clamp(16px,4vw,40px) 28px}
+  .hero-home{min-height:100vh;min-height:100dvh;padding:clamp(96px,22vw,120px) clamp(16px,5vw,40px) clamp(48px,10vw,80px);box-sizing:border-box}
+  @media(max-width:600px){.hero-stats{flex-wrap:wrap;justify-content:flex-start;gap:clamp(16px,4vw,24px)!important;margin-top:clamp(28px,6vw,42px)!important}}
+  .product-grid{display:grid;width:100%;max-width:1200px;margin:0 auto;gap:22px;grid-template-columns:repeat(auto-fill,minmax(min(100%,260px),1fr))}
+  .cart-drawer-panel{width:min(100%,360px);max-width:100%}
+  @media(max-width:480px){.cart-drawer-panel{width:100%!important;border-left:none!important}}
+  .form-grid-2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  @media(max-width:540px){.form-grid-2{grid-template-columns:1fr!important}}
+  img,video{max-width:100%;height:auto}
 `;
 
 export default function App() {

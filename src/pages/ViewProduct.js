@@ -24,7 +24,10 @@ export default function ViewProduct({ onAdd, onView }) {
   };
 
   return (
-    <section style={{ padding: "100px 40px 80px", background: "#FDFCF8" }}>
+    <section
+      className="section-pad"
+      style={{ paddingTop: "clamp(88px, 14vw, 100px)", background: "#FDFCF8" }}
+    >
       <div style={{ maxWidth: 1200, margin: "0 auto" }}>
         <div style={{ marginBottom: 34 }}>
           <h1 className="fr" style={{ fontSize: "clamp(32px, 5vw, 48px)", fontWeight: 900, color: "#1C1C2E", marginBottom: 28 }}>
@@ -94,14 +97,7 @@ export default function ViewProduct({ onAdd, onView }) {
         </div>
 
         {/* Products Grid */}
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(3, minmax(280px, 1fr))",
-            gap: 24,
-            marginBottom: 48,
-          }}
-        >
+        <div className="product-grid" style={{ gap: 24, marginBottom: 48 }}>
           {paginatedProducts.map((p, idx) => (
             <ProductCard
               key={p.id}

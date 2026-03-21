@@ -15,18 +15,19 @@ export default function CartDrawer({ cartOpen, onClose, cart, onRemove, cartTota
             }}
           />
           <div
+            className="cart-drawer-panel"
             style={{
               position: "absolute",
               right: 0,
               top: 0,
               bottom: 0,
-              width: 360,
               background: "#fff",
               borderLeft: "2px solid #EAE8F2",
-              padding: 26,
+              padding: "clamp(18px, 5vw, 26px)",
               display: "flex",
               flexDirection: "column",
               boxShadow: "-16px 0 60px rgba(0,0,0,.10)",
+              boxSizing: "border-box",
             }}
           >
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 26 }}>

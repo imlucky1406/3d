@@ -150,7 +150,15 @@ const ProductCard = ({ p, onAdd, onView, idx }) => {
       <div style={{ fontSize: 13, color: "#6B6B8A", lineHeight: 1.6, marginBottom: 16 }}>
         {p.desc}
       </div>
-      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          flexWrap: "wrap",
+          gap: 10,
+        }}
+      >
         <div
           style={{
             fontFamily: "Fraunces,serif",
@@ -209,7 +217,7 @@ export default function Products({ onAdd, onView }) {
   const navigate = useNavigate();
 
   return (
-    <section id="products" style={{ padding: "76px 40px", background: "#FDFCF8" }}>
+    <section id="products" className="section-pad" style={{ background: "#FDFCF8" }}>
         <div style={{ maxWidth: 1200, margin: "0 auto" }}>
             <div className="slabel">✦ Featured Collection</div>
                 <div
@@ -241,7 +249,7 @@ export default function Products({ onAdd, onView }) {
                 </span>
             </div>
         </div>
-        <div style={{ display: "grid", width: "80%", margin: "0 auto", gridTemplateColumns: "repeat(3,minmax(300px,1fr))", gap: 22 }}>
+        <div className="product-grid">
           {PRODUCTS.slice(0, 6).map((p, i) => (
             <ProductCard key={p.id} p={p} onAdd={onAdd} onView={() => onView(p)} idx={i} />
           ))}

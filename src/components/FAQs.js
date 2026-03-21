@@ -52,6 +52,7 @@ const FAQItem = ({ faq, isOpen, onToggle }) => {
       }}
     >
       <button
+        type="button"
         onClick={() => onToggle(faq.id)}
         style={{
           width: "100%",
@@ -68,7 +69,16 @@ const FAQItem = ({ faq, isOpen, onToggle }) => {
         onMouseEnter={(e) => (e.currentTarget.style.background = "#FDFCF8")}
         onMouseLeave={(e) => (e.currentTarget.style.background = "none")}
       >
-        <span style={{ fontWeight: 800, fontSize: 16, color: "#1C1C2E" }}>
+        <span
+          style={{
+            fontWeight: 800,
+            fontSize: "clamp(14px, 3.8vw, 16px)",
+            color: "#1C1C2E",
+            textAlign: "left",
+            wordBreak: "break-word",
+            paddingRight: 8,
+          }}
+        >
           {faq.question}
         </span>
         <div
@@ -109,7 +119,7 @@ export default function FAQs() {
   };
 
   return (
-    <section style={{ padding: "76px 40px", background: "#FDFCF8" }}>
+    <section className="section-pad" style={{ background: "#FDFCF8" }}>
       <div style={{ maxWidth: 800, margin: "0 auto" }}>
         <div style={{ textAlign: "center", marginBottom: 52 }}>
           <div className="slabel" style={{ display: "flex", justifyContent: "center" }}>

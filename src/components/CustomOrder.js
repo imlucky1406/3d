@@ -54,7 +54,7 @@ export default function CustomOrder({ onQuoteOpen, onQuoteSuccess }) {
   };
 
   return (
-    <section id="custom-order" style={{ padding: "76px 40px", background: "#FDFCF8" }}>
+    <section id="custom-order" className="section-pad" style={{ background: "#FDFCF8" }}>
       <div
         style={{
           maxWidth: 1100,
@@ -128,7 +128,7 @@ export default function CustomOrder({ onQuoteOpen, onQuoteSuccess }) {
             background: "#fff",
             border: "2px solid #EAE8F2",
             borderRadius: 26,
-            padding: 30,
+            padding: "clamp(20px, 5vw, 30px)",
             boxShadow: "0 8px 40px rgba(0,0,0,.06)",
           }}
         >
@@ -172,7 +172,7 @@ export default function CustomOrder({ onQuoteOpen, onQuoteSuccess }) {
             </div>
           </div>
 
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12, marginBottom: 12 }}>
+          <div className="form-grid-2" style={{ marginBottom: 12 }}>
             <div>
               <label
                 style={{
@@ -219,7 +219,7 @@ export default function CustomOrder({ onQuoteOpen, onQuoteSuccess }) {
             </div>
           </div>
 
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12, marginBottom: 12 }}>
+          <div className="form-grid-2" style={{ marginBottom: 12 }}>
             <div>
               <label
                 style={{

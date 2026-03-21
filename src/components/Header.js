@@ -12,7 +12,9 @@ export default function Header({ scrolled, cartCount, onCartOpen }) {
         left: 0,
         right: 0,
         zIndex: 100,
-        padding: scrolled ? "11px 36px" : "18px 36px",
+        padding: scrolled
+          ? "11px clamp(14px, 4vw, 36px)"
+          : "18px clamp(14px, 4vw, 36px)",
         background: scrolled ? "rgba(253,252,248,.93)" : "transparent",
         backdropFilter: scrolled ? "blur(20px)" : "none",
         borderBottom: scrolled ? "1.5px solid #EAE8F2" : "none",
@@ -146,21 +148,24 @@ export default function Header({ scrolled, cartCount, onCartOpen }) {
         </a>
       </div>
       <button
+        type="button"
         onClick={onCartOpen}
         style={{
           background: "#FF6B6B",
           border: "none",
           borderRadius: 999,
-          padding: "9px 20px",
+          padding: "10px clamp(12px, 3vw, 20px)",
+          minHeight: 44,
           cursor: "pointer",
           color: "#fff",
-          fontSize: 14,
+          fontSize: "clamp(12px, 3.2vw, 14px)",
           fontWeight: 800,
           display: "flex",
           alignItems: "center",
           gap: 8,
           boxShadow: "0 4px 16px #FF6B6B44",
           transition: "transform .2s",
+          flexShrink: 0,
         }}
         onMouseEnter={(e) => (e.currentTarget.style.transform = "translateY(-2px)")}
         onMouseLeave={(e) => (e.currentTarget.style.transform = "none")}

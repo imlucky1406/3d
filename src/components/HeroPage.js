@@ -6,11 +6,10 @@ import customImg from "../assets/image/3D-printer.png";
 export default function HeroPage() {
   return (
     <section
+      className="hero-home"
       style={{
-        minHeight: "100vh",
         display: "flex",
         alignItems: "center",
-        padding: "120px 40px 80px",
         background: "linear-gradient(155deg,#FFFDF8 0%,#FFF4E6 45%,#E8FFFB 100%)",
         gap: 56,
         flexWrap: "wrap",
@@ -42,7 +41,7 @@ export default function HeroPage() {
           pointerEvents: "none",
         }}
       />
-      <div style={{ flex: 1, minWidth: 280, maxWidth: 560, position: "relative" }}>
+      <div style={{ flex: 1, minWidth: "min(100%, 280px)", maxWidth: 560, position: "relative" }}>
         <div className="pill fu" style={{ marginBottom: 22 }}>
           ✨ Next-Gen 3D Manufacturing
         </div>
@@ -100,7 +99,7 @@ export default function HeroPage() {
           </button>
         </div>
         <div
-          className="fu"
+          className="fu hero-stats"
           style={{ display: "flex", gap: 36, marginTop: 42, animationDelay: ".34s" }}
         >
           {[
