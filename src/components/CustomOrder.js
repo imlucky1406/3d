@@ -16,13 +16,8 @@ export default function CustomOrder({ onQuoteOpen, onQuoteSuccess }) {
   const handleQuoteSubmit = async (e) => {
     e.preventDefault();
     const form = e.target;
-<<<<<<< HEAD
-    const email = (form.Email && form.Email.value || "").trim();
-    const phone = (form.Phone && form.Phone.value || "").trim();
-=======
     const email = (form.Email?.value ?? "").trim();
     const phone = (form.Phone?.value ?? "").trim();
->>>>>>> 800ef92 (printer)
     const fileRequired = !quoteFile;
     const errs = {
       email: !email ? "This field is required" : "",

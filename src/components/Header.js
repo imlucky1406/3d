@@ -1,9 +1,5 @@
 import React from "react";
-<<<<<<< HEAD
-import { NavLink, useNavigate } from "react-router-dom";
-=======
 import { useNavigate } from "react-router-dom";
->>>>>>> 800ef92 (printer)
 import { NAV_LINKS } from "../data";
 
 export default function Header({ scrolled, cartCount, onCartOpen }) {
@@ -62,10 +58,7 @@ export default function Header({ scrolled, cartCount, onCartOpen }) {
       </div>
       <div className="hide-m" style={{ display: "flex", gap: 32 }}>
         <a
-<<<<<<< HEAD
-=======
           href="/"
->>>>>>> 800ef92 (printer)
           onClick={(e) => {
             e.preventDefault();
             navigate("/");
@@ -83,57 +76,38 @@ export default function Header({ scrolled, cartCount, onCartOpen }) {
         >
           Home
         </a>
-<<<<<<< HEAD
-        {NAV_LINKS.map((l) => (
-          <a
-            key={l}
-            href="#"
-            onClick={(e) => {
-              e.preventDefault();
-
-              const id = l.toLowerCase().replace(/ /g, "-");
-
-=======
         {NAV_LINKS.map((l) => {
           const id = l.toLowerCase().replace(/ /g, "-");
           return (
-          <a
-            key={l}
-            href={`/#${id}`}
-            onClick={(e) => {
-              e.preventDefault();
-
->>>>>>> 800ef92 (printer)
-              navigate("/");
-
-              setTimeout(() => {
-                const el = document.getElementById(id);
-                if (el) {
-                  el.scrollIntoView({ behavior: "smooth" });
-                }
-              }, 100);
-            }}
-            style={{
-              color: "#6B6B8A",
-              textDecoration: "none",
-              fontSize: 14,
-              fontWeight: 700,
-              transition: "color .2s",
-            }}
-            onMouseEnter={(e) => (e.target.style.color = "#FF6B6B")}
-            onMouseLeave={(e) => (e.target.style.color = "#6B6B8A")}
-          >
-            {l}
-          </a>
-<<<<<<< HEAD
-        ))}
-        <a
-=======
+            <a
+              key={l}
+              href={`/#${id}`}
+              onClick={(e) => {
+                e.preventDefault();
+                navigate("/");
+                setTimeout(() => {
+                  const el = document.getElementById(id);
+                  if (el) {
+                    el.scrollIntoView({ behavior: "smooth" });
+                  }
+                }, 100);
+              }}
+              style={{
+                color: "#6B6B8A",
+                textDecoration: "none",
+                fontSize: 14,
+                fontWeight: 700,
+                transition: "color .2s",
+              }}
+              onMouseEnter={(e) => (e.target.style.color = "#FF6B6B")}
+              onMouseLeave={(e) => (e.target.style.color = "#6B6B8A")}
+            >
+              {l}
+            </a>
           );
         })}
         <a
           href="/about"
->>>>>>> 800ef92 (printer)
           onClick={(e) => {
             e.preventDefault();
             navigate("/about");
@@ -152,10 +126,7 @@ export default function Header({ scrolled, cartCount, onCartOpen }) {
           About
         </a>
         <a
-<<<<<<< HEAD
-=======
           href="/contact"
->>>>>>> 800ef92 (printer)
           onClick={(e) => {
             e.preventDefault();
             navigate("/contact");
@@ -173,7 +144,6 @@ export default function Header({ scrolled, cartCount, onCartOpen }) {
         >
           Contact
         </a>
-
       </div>
       <button
         onClick={onCartOpen}

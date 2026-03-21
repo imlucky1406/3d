@@ -1,10 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-<<<<<<< HEAD
-import { PRODUCTS,CATEGORIES, CATEGORY_TO_PRODUCT } from "../data";
-=======
 import { PRODUCTS } from "../data";
->>>>>>> 800ef92 (printer)
 
 const ProductCard = ({ p, onAdd, onView, idx }) => {
   const [hov, setHov] = useState(false);
@@ -211,13 +207,6 @@ const ProductCard = ({ p, onAdd, onView, idx }) => {
 
 export default function Products({ onAdd, onView }) {
   const navigate = useNavigate();
-<<<<<<< HEAD
-  const [viewAllProducts, setViewAllProducts] = useState(false);
-  const [productCategoryFilter, setProductCategoryFilter] = useState("");
-
-  const filteredProducts = !productCategoryFilter ? PRODUCTS : PRODUCTS.filter((p) => CATEGORY_TO_PRODUCT[productCategoryFilter] === p.category);
-=======
->>>>>>> 800ef92 (printer)
 
   return (
     <section id="products" style={{ padding: "76px 40px", background: "#FDFCF8" }}>
@@ -257,22 +246,6 @@ export default function Products({ onAdd, onView }) {
             <ProductCard key={p.id} p={p} onAdd={onAdd} onView={() => onView(p)} idx={i} />
           ))}
         </div>
-<<<<<<< HEAD
-        {viewAllProducts && filteredProducts.length === 0 && (
-          <div
-            style={{
-              textAlign: "center",
-              padding: "48px 20px",
-              color: "#9B9BBB",
-              fontSize: 15,
-              fontWeight: 700,
-            }}
-          >
-            No products in this category yet.
-          </div>
-        )}
-=======
->>>>>>> 800ef92 (printer)
     </section>
   );
 }
