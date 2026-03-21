@@ -17,6 +17,10 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
+<<<<<<< HEAD
+=======
+    "dev": "react-scripts start",
+>>>>>>> 800ef92 (printer)
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",

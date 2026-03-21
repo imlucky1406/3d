@@ -1,5 +1,9 @@
 import React from "react";
+<<<<<<< HEAD
 import { NavLink, useNavigate } from "react-router-dom";
+=======
+import { useNavigate } from "react-router-dom";
+>>>>>>> 800ef92 (printer)
 import { NAV_LINKS } from "../data";
 
 export default function Header({ scrolled, cartCount, onCartOpen }) {
@@ -58,6 +62,10 @@ export default function Header({ scrolled, cartCount, onCartOpen }) {
       </div>
       <div className="hide-m" style={{ display: "flex", gap: 32 }}>
         <a
+<<<<<<< HEAD
+=======
+          href="/"
+>>>>>>> 800ef92 (printer)
           onClick={(e) => {
             e.preventDefault();
             navigate("/");
@@ -75,6 +83,7 @@ export default function Header({ scrolled, cartCount, onCartOpen }) {
         >
           Home
         </a>
+<<<<<<< HEAD
         {NAV_LINKS.map((l) => (
           <a
             key={l}
@@ -84,6 +93,17 @@ export default function Header({ scrolled, cartCount, onCartOpen }) {
 
               const id = l.toLowerCase().replace(/ /g, "-");
 
+=======
+        {NAV_LINKS.map((l) => {
+          const id = l.toLowerCase().replace(/ /g, "-");
+          return (
+          <a
+            key={l}
+            href={`/#${id}`}
+            onClick={(e) => {
+              e.preventDefault();
+
+>>>>>>> 800ef92 (printer)
               navigate("/");
 
               setTimeout(() => {
@@ -105,8 +125,15 @@ export default function Header({ scrolled, cartCount, onCartOpen }) {
           >
             {l}
           </a>
+<<<<<<< HEAD
         ))}
         <a
+=======
+          );
+        })}
+        <a
+          href="/about"
+>>>>>>> 800ef92 (printer)
           onClick={(e) => {
             e.preventDefault();
             navigate("/about");
@@ -125,6 +152,10 @@ export default function Header({ scrolled, cartCount, onCartOpen }) {
           About
         </a>
         <a
+<<<<<<< HEAD
+=======
+          href="/contact"
+>>>>>>> 800ef92 (printer)
           onClick={(e) => {
             e.preventDefault();
             navigate("/contact");
