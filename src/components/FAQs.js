@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const FAQS = [
   {
@@ -112,6 +113,7 @@ const FAQItem = ({ faq, isOpen, onToggle }) => {
 };
 
 export default function FAQs() {
+  const navigate = useNavigate();
   const [openId, setOpenId] = useState(null);
 
   const toggleFAQ = (id) => {
@@ -190,9 +192,14 @@ export default function FAQs() {
             Contact our friendly support team. We're here to help!
           </p>
           <button
+            type="button"
             className="btn-coral"
             style={{
               fontSize: 14,
+            }}
+            onClick={() => {
+              navigate("/contact");
+              window.scrollTo({ top: 0, behavior: "smooth" });
             }}
           >
             Get in Touch →

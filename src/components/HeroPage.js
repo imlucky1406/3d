@@ -11,7 +11,7 @@ export default function HeroPage() {
         display: "flex",
         alignItems: "center",
         background: "linear-gradient(155deg,#FFFDF8 0%,#FFF4E6 45%,#E8FFFB 100%)",
-        gap: 56,
+        gap: "clamp(24px, 5vw, 56px)",
         flexWrap: "wrap",
         position: "relative",
         overflow: "hidden",

@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { PRODUCTS } from "../data";
+import { openWhatsAppForProduct } from "../utils/whatsapp";
+import WhatsAppIcon from "./WhatsAppIcon";
 
-const ProductCard = ({ p, onAdd, onView, idx }) => {
+const ProductCard = ({ p, onView, idx }) => {
   const [hov, setHov] = useState(false);
   const [imgIdx, setImgIdx] = useState(0);
 
@@ -189,23 +191,32 @@ const ProductCard = ({ p, onAdd, onView, idx }) => {
             Preview
           </button>
           <button
-            onClick={() => onAdd(p)}
+            type="button"
+            title="Chat on WhatsApp"
+            aria-label={`WhatsApp about ${p.name}`}
+            onClick={(e) => {
+              e.stopPropagation();
+              openWhatsAppForProduct(p);
+            }}
             style={{
               background: p.accent,
               border: "none",
               borderRadius: 10,
-              padding: "8px 14px",
+              width: 40,
+              height: 36,
+              padding: 0,
               cursor: "pointer",
               color: "#fff",
-              fontSize: 12,
-              fontWeight: 800,
-              boxShadow: `0 4px 14px ${p.accent}44`,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              boxShadow: `0 4px 14px ${p.accent}66`,
               transition: "transform .2s",
             }}
             onMouseEnter={(e) => (e.currentTarget.style.transform = "scale(1.06)")}
             onMouseLeave={(e) => (e.currentTarget.style.transform = "scale(1)")}
           >
-            + Cart
+            <WhatsAppIcon size={20} />
           </button>
         </div>
       </div>
@@ -213,7 +224,7 @@ const ProductCard = ({ p, onAdd, onView, idx }) => {
   );
 };
 
-export default function Products({ onAdd, onView }) {
+export default function Products({ onView }) {
   const navigate = useNavigate();
 
   return (
@@ -249,9 +260,9 @@ export default function Products({ onAdd, onView }) {
                 </span>
             </div>
         </div>
-        <div className="product-grid">
+        <div className="product-grid products-home-3">
           {PRODUCTS.slice(0, 6).map((p, i) => (
-            <ProductCard key={p.id} p={p} onAdd={onAdd} onView={() => onView(p)} idx={i} />
+            <ProductCard key={p.id} p={p} onView={() => onView(p)} idx={i} />
           ))}
         </div>
     </section>

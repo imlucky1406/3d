@@ -10,7 +10,7 @@ export default function ReturnPolicy() {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          padding: "140px 40px 80px",
+          padding: "clamp(96px, 18vw, 140px) clamp(16px, 5vw, 40px) clamp(48px, 10vw, 80px)",
           background: "linear-gradient(155deg,#FFFDF8 0%,#F0F8FF 45%,#E8FFFB 100%)",
           position: "relative",
           overflow: "hidden",
@@ -60,7 +60,7 @@ export default function ReturnPolicy() {
       {/* Content Section */}
       <section
         style={{
-          padding: "100px 40px",
+          padding: "clamp(48px, 10vw, 100px) clamp(16px, 5vw, 40px)",
           background: "#FDFCF8",
         }}
       >

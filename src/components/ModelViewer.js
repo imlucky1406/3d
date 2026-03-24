@@ -54,11 +54,15 @@ function Model({ url }) {
 }
 
 
-export default function ModelViewer({ model }) {
+export default function ModelViewer({ model, fillContainer }) {
   return (
     <Canvas
       camera={{ position: [0, 0, 15],  fov: 60 }}
-      style={{ width: "100%", height: "300px" }}
+      style={
+        fillContainer
+          ? { width: "100%", height: "100%", minHeight: 0, display: "block" }
+          : { width: "100%", height: "clamp(220px, 52vw, 300px)" }
+      }
       gl={{ preserveDrawingBuffer: true }}
     >
       <ambientLight intensity={0.7} />

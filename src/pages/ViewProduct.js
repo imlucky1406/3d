@@ -1,7 +1,9 @@
 import { useState } from "react";
 import { PRODUCTS, CATEGORIES, CATEGORY_TO_PRODUCT } from "../data";
+import { openWhatsAppForProduct } from "../utils/whatsapp";
+import WhatsAppIcon from "../components/WhatsAppIcon";
 
-export default function ViewProduct({ onAdd, onView }) {
+export default function ViewProduct({ onView }) {
   const [productCategoryFilter, setProductCategoryFilter] = useState("");
   const [currentPage, setCurrentPage] = useState(0);
 
@@ -35,11 +37,23 @@ export default function ViewProduct({ onAdd, onView }) {
           </h1>
 
           {/* Category Filter */}
-          <div style={{ display: "flex", gap: 12, flexWrap: "wrap", marginBottom: 34 }}>
+          <div
+            style={{
+              display: "flex",
+              gap: 12,
+              flexWrap: "nowrap",
+              marginBottom: 34,
+              overflowX: "auto",
+              WebkitOverflowScrolling: "touch",
+              paddingBottom: 6,
+              scrollbarWidth: "thin",
+            }}
+          >
             <button
               onClick={() => handleFilterChange("")}
               style={{
                 padding: "10px 20px",
+                flexShrink: 0,
                 borderRadius: 999,
                 border: productCategoryFilter === "" ? "2px solid #FF6B6B" : "2px solid #E8E6F0",
                 background: productCategoryFilter === "" ? "#FF6B6B" : "#fff",
@@ -67,6 +81,7 @@ export default function ViewProduct({ onAdd, onView }) {
                 onClick={() => handleFilterChange(cat.name)}
                 style={{
                   padding: "10px 20px",
+                  flexShrink: 0,
                   borderRadius: 999,
                   border: productCategoryFilter === cat.name ? `2px solid ${cat.accent}` : "2px solid #E8E6F0",
                   background: productCategoryFilter === cat.name ? cat.accent : "#fff",
@@ -102,7 +117,6 @@ export default function ViewProduct({ onAdd, onView }) {
             <ProductCard
               key={p.id}
               p={p}
-              onAdd={onAdd}
               onView={() => onView(p)}
               idx={idx}
             />
@@ -117,15 +131,7 @@ export default function ViewProduct({ onAdd, onView }) {
 
         {/* Pagination Controls */}
         {filteredProducts.length > productsPerPage && (
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              gap: 8,
-              marginTop: 40,
-            }}
-          >
+          <div className="pagination-row" style={{ marginTop: 40 }}>
             <button
               onClick={() => {
                 setCurrentPage((p) => Math.max(p - 1, 0));
@@ -231,7 +237,7 @@ export default function ViewProduct({ onAdd, onView }) {
   );
 }
 
-const ProductCard = ({ p, onAdd, onView, idx }) => {
+const ProductCard = ({ p, onView, idx }) => {
   const [hov, setHov] = useState(false);
   const [imgIdx, setImgIdx] = useState(0);
 
@@ -410,23 +416,32 @@ const ProductCard = ({ p, onAdd, onView, idx }) => {
             Preview
           </button>
           <button
-            onClick={() => onAdd(p)}
+            type="button"
+            title="Chat on WhatsApp"
+            aria-label={`WhatsApp about ${p.name}`}
+            onClick={(e) => {
+              e.stopPropagation();
+              openWhatsAppForProduct(p);
+            }}
             style={{
               background: p.accent,
               border: "none",
               borderRadius: 10,
-              padding: "8px 14px",
+              width: 40,
+              height: 36,
+              padding: 0,
               cursor: "pointer",
               color: "#fff",
-              fontSize: 12,
-              fontWeight: 800,
-              boxShadow: `0 4px 14px ${p.accent}44`,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              boxShadow: `0 4px 14px ${p.accent}66`,
               transition: "transform .2s",
             }}
             onMouseEnter={(e) => (e.currentTarget.style.transform = "scale(1.06)")}
             onMouseLeave={(e) => (e.currentTarget.style.transform = "scale(1)")}
           >
-            + Cart
+            <WhatsAppIcon size={20} />
           </button>
         </div>
       </div>

@@ -8,11 +8,11 @@ import Customers from "../components/Customers";
 import FAQs from "../components/FAQs";
 import Banner from "../components/Banner";
 
-export default function Home({ onAdd, onView, onQuoteOpen, onQuoteSuccess }) {
+export default function Home({ onView, onQuoteOpen, onQuoteSuccess }) {
   return (
     <>
         <HeroPage />
-        <Products onAdd={onAdd} onView={onView} />
+        <Products onView={onView} />
         <HowItWorks />
         <CustomOrder onQuoteOpen={onQuoteOpen} onQuoteSuccess={onQuoteSuccess} />
         <Category />

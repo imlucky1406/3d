@@ -1,8 +1,7 @@
 import { useState, useEffect } from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
-import CartDrawer from "./components/CartDrawer";
 import ProductModal from "./components/ProductModal";
 import QuoteModal from "./components/QuoteModal";
 import Home from "./pages/Home";
@@ -13,11 +12,20 @@ import ReturnPolicy from "./pages/ReturnPolicy";
 import TermsAndConditions from "./pages/TermsAndConditions";
 import Contact from "./pages/Contact";
 
+function ScrollToTop() {
+  const { pathname } = useLocation();
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+  }, [pathname]);
+  return null;
+}
+
 const CSS = `
   @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Fraunces:ital,opsz,wght@0,9..144,700;0,9..144,900;1,9..144,900&display=swap');
   *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-  html{scroll-behavior:smooth}
-  body{font-family:'Nunito',sans-serif;background:#FDFCF8;color:#1C1C2E;overflow-x:hidden}
+  html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;text-size-adjust:100%}
+  body{font-family:'Nunito',sans-serif;background:#FDFCF8;color:#1C1C2E;overflow-x:hidden;padding-bottom:max(0px, env(safe-area-inset-bottom))}
+  #root{min-height:100dvh}
   ::-webkit-scrollbar{width:6px}::-webkit-scrollbar-track{background:#F5F4F0}::-webkit-scrollbar-thumb{background:#FF9F43;border-radius:99px}
   .fr{font-family:'Fraunces',serif}
   .pill{display:inline-flex;align-items:center;gap:6px;background:#FFF0E6;border:1.5px solid #FFD4AA;border-radius:999px;padding:6px 16px;font-size:13px;font-weight:800;color:#FF6B6B}
@@ -34,26 +42,57 @@ const CSS = `
   @keyframes pop{0%{transform:scale(.75);opacity:0}70%{transform:scale(1.08)}100%{transform:scale(1);opacity:1}}
   .float{animation:float 3.8s ease-in-out infinite}
   .fu{animation:fadeUp .6s cubic-bezier(.22,1,.36,1) forwards;opacity:0}
-  .modal-wrap{position:fixed;inset:0;background:rgba(253,252,248,.88);backdrop-filter:blur(14px);z-index:999;display:flex;align-items:center;justify-content:center;padding:20px}
+  .modal-wrap{position:fixed;inset:0;background:rgba(253,252,248,.88);backdrop-filter:blur(14px);z-index:999;display:flex;align-items:center;justify-content:center;padding:max(12px, env(safe-area-inset-left)) max(12px, env(safe-area-inset-right)) max(12px, env(safe-area-inset-bottom)) max(12px, env(safe-area-inset-top))}
   .modal{background:#fff;border:2px solid #EAE8F2;border-radius:28px;padding:36px;max-width:540px;width:100%;max-height:90vh;overflow-y:auto;box-shadow:0 24px 80px rgba(0,0,0,.1);animation:pop .4s cubic-bezier(.22,1,.36,1)}
+  @media(max-width:600px){.modal{padding:22px 18px;border-radius:20px}}
+  .product-modal-fs{position:fixed;inset:0;z-index:1000;overflow:hidden;display:flex;flex-direction:column;box-sizing:border-box;background:linear-gradient(165deg,#FDFCF8 0%,#F6F3FA 42%,#FFF8F0 100%);padding:max(12px, env(safe-area-inset-top)) max(14px, env(safe-area-inset-right)) max(14px, env(safe-area-inset-bottom)) max(14px, env(safe-area-inset-left))}
+  .product-modal-fs-inner{display:flex;flex-direction:column;width:100%;flex:1;min-height:0;max-height:100%;position:relative;gap:clamp(12px,2.5vw,22px)}
+  .product-modal-panel{border-radius:clamp(16px,3.2vw,26px);overflow:hidden;border:1px solid #E8E6F0;background:#fff;box-shadow:0 12px 48px rgba(28,28,46,.09),0 2px 12px rgba(28,28,46,.05)}
+  .product-modal-media.product-modal-panel{padding:clamp(18px,4vw,40px);box-sizing:border-box}
+  .product-modal-details.product-modal-panel{border:none;box-shadow:0 4px 24px rgba(28,28,46,.04),0 1px 3px rgba(28,28,46,.03)}
+  .product-modal-media{display:flex;flex-direction:column;min-height:0;min-width:0;position:relative}
+  .product-modal-img-wrap{flex:1;min-height:0;width:100%;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+  .product-modal-details{display:flex;flex-direction:column;min-height:0;min-width:0;padding:clamp(18px,4vw,32px);overflow:hidden}
+  @media(min-width:900px){
+    .product-modal-fs-inner{flex-direction:row;align-items:stretch}
+    .product-modal-media{flex:6 1 0;min-width:0;width:auto;max-width:none;height:auto;max-height:100%}
+    .product-modal-details{flex:4 1 0;min-width:0;width:auto;max-width:none;height:auto;max-height:100%;justify-content:flex-start;padding:clamp(22px,4vw,40px);overflow-y:auto;-webkit-overflow-scrolling:touch}
+  }
+  @media(max-width:899px){
+    .product-modal-fs{overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;overscroll-behavior-y:contain}
+    .product-modal-fs-inner{flex:0 0 auto;min-height:0;max-height:none;height:auto;width:100%}
+    .product-modal-media{flex:0 0 auto;height:min(42vh, 380px);min-height:220px;max-height:48vh}
+    .product-modal-img-wrap{flex:1;min-height:0}
+    .product-modal-details{flex:0 0 auto;overflow:visible;height:auto;min-height:0}
+  }
+  .product-modal-close{position:absolute;top:max(8px, env(safe-area-inset-top));right:max(8px, env(safe-area-inset-right));z-index:30;width:46px;height:46px;border-radius:14px;border:1.5px solid #EAE8F2;background:linear-gradient(180deg,#fff 0%,#FAFAFC 100%);cursor:pointer;font-size:18px;font-weight:800;color:#6B6B8A;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 24px rgba(28,28,46,.12),0 2px 8px rgba(28,28,46,.06);transition:color .2s,border-color .2s,transform .2s}
+  .product-modal-close:hover{color:#FF6B6B;border-color:#FFD4AA;transform:scale(1.03)}
+  .product-modal-close:active{transform:scale(.98)}
+  .product-modal-close:focus-visible{outline:2px solid #FF6B6B;outline-offset:3px;color:#FF6B6B}
+  .nav-burger{display:none!important;align-items:center;justify-content:center}
+  @media(max-width:900px){.nav-burger{display:flex!important}}
   @media(max-width:900px){.two-col{grid-template-columns:1fr!important}.hide-m{display:none!important}}
   @media(max-width:600px){.g3{grid-template-columns:repeat(2,1fr)!important}}
   @media(max-width:400px){.g3{grid-template-columns:1fr!important}}
+  .about-core-values-grid{display:grid;width:100%;gap:clamp(20px,3vw,28px);grid-template-columns:repeat(4,minmax(0,1fr))}
+  @media(max-width:1024px){.about-core-values-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
+  @media(max-width:480px){.about-core-values-grid{grid-template-columns:1fr!important}}
   .section-pad{padding:clamp(48px,8vw,76px) clamp(16px,4vw,40px)}
   .footer-pad{padding:clamp(40px,6vw,56px) clamp(16px,4vw,40px) 28px}
   .hero-home{min-height:100vh;min-height:100dvh;padding:clamp(96px,22vw,120px) clamp(16px,5vw,40px) clamp(48px,10vw,80px);box-sizing:border-box}
   @media(max-width:600px){.hero-stats{flex-wrap:wrap;justify-content:flex-start;gap:clamp(16px,4vw,24px)!important;margin-top:clamp(28px,6vw,42px)!important}}
   .product-grid{display:grid;width:100%;max-width:1200px;margin:0 auto;gap:22px;grid-template-columns:repeat(auto-fill,minmax(min(100%,260px),1fr))}
-  .cart-drawer-panel{width:min(100%,360px);max-width:100%}
-  @media(max-width:480px){.cart-drawer-panel{width:100%!important;border-left:none!important}}
+  .products-home-3{grid-template-columns:repeat(3,minmax(0,1fr))!important}
+  @media(max-width:900px){.products-home-3{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
+  @media(max-width:520px){.products-home-3{grid-template-columns:1fr!important}}
+  .pagination-row{display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap;max-width:100%}
+  @media(max-width:480px){.pagination-row{gap:6px}}
   .form-grid-2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
   @media(max-width:540px){.form-grid-2{grid-template-columns:1fr!important}}
   img,video{max-width:100%;height:auto}
 `;
 
 export default function App() {
-  const [cart, setCart] = useState([]);
-  const [cartOpen, setCartOpen] = useState(false);
   const [activeProduct, setActiveProduct] = useState(null);
   const [scrolled, setScrolled] = useState(false);
   const [quoteOpen, setQuoteOpen] = useState(false);
@@ -66,19 +105,6 @@ export default function App() {
     return () => window.removeEventListener("scroll", fn);
   }, []);
 
-  const addToCart = (p) =>
-    setCart((c) =>
-      c.find((x) => x.id === p.id)
-        ? c.map((x) =>
-            x.id === p.id ? { ...x, qty: x.qty + 1 } : x
-          )
-        : [...c, { ...p, qty: 1 }]
-    );
-
-  const removeFromCart = (id) => setCart((c) => c.filter((x) => x.id !== id));
-  const cartTotal = cart.reduce((s, x) => s + x.price * x.qty, 0);
-  const cartCount = cart.reduce((s, x) => s + x.qty, 0);
-
   const handleQuoteSuccess = (size, mat) => {
     setCustSize(size);
     setCustMat(mat);
@@ -87,20 +113,16 @@ export default function App() {
 
   return (
     <BrowserRouter>
+      <ScrollToTop />
       <style>{CSS}</style>
 
-      <Header
-        scrolled={scrolled}
-        cartCount={cartCount}
-        onCartOpen={() => setCartOpen(true)}
-      />
+      <Header scrolled={scrolled} />
 
       <Routes>
         <Route
           path="/"
           element={
             <Home
-              onAdd={addToCart}
               onView={setActiveProduct}
               onQuoteOpen={() => setQuoteOpen(true)}
               onQuoteSuccess={handleQuoteSuccess}
@@ -110,10 +132,7 @@ export default function App() {
         <Route
           path="/viewproduct"
           element={
-            <ViewProduct
-              onAdd={addToCart}
-              onView={setActiveProduct}
-            />
+            <ViewProduct onView={setActiveProduct} />
           }
         />
         <Route
@@ -155,23 +174,7 @@ export default function App() {
 
       <Footer />
 
-      <CartDrawer
-        cartOpen={cartOpen}
-        onClose={() => setCartOpen(false)}
-        cart={cart}
-        onRemove={removeFromCart}
-        cartTotal={cartTotal}
-      />
-
-      <ProductModal
-        activeProduct={activeProduct}
-        onClose={() => setActiveProduct(null)}
-        onAddToCart={(p) => {
-          addToCart(p);
-          setActiveProduct(null);
-          setCartOpen(true);
-        }}
-      />
+      <ProductModal activeProduct={activeProduct} onClose={() => setActiveProduct(null)} />
 
       <QuoteModal
         quoteOpen={quoteOpen}

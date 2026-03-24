@@ -56,6 +56,9 @@ export const HOW_STEPS = [
   { n: "04", icon: "📦", title: "Delivered to You", desc: "Carefully packaged and tracked delivery in 3–7 business days.", accent: "#27AE60", bg: "#EDFFF5" },
 ];
 
+/** WhatsApp Business number: digits only, with country code (no + or spaces). Replace with your number. */
+export const WHATSAPP_BUSINESS_NUMBER = "919016772742";
+
 export const TESTIMONIALS = [
   { name: "Sarah K.", role: "Interior Designer", text: "The planter arrived perfectly printed. The detail is jaw-dropping — already ordered three more colourways.", avatar: "SK", accent: "#FF6B6B", bg: "#FFF0F0" },
   { name: "Marcus T.", role: "Software Engineer", text: "Cable hub is a desk game-changer. Ordered a custom version with my logo on Friday, had it Tuesday.", avatar: "MT", accent: "#0ABFBC", bg: "#E6FFFE" },
